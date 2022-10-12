@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Row } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "./flashcard.sass";
 
 const Flashcard = (props) => {
