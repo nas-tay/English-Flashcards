@@ -4,28 +4,35 @@
     display: flex
     justify-content: center
     align-items: center
-    width: 18rem
+    width: 15rem
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3)
-    height: 10rem
-    transform-style: preserve-3d
-    transition: 150ms
-    transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0))
-    cursor: pointer
+    height: 20rem
+    // transform-style: preserve-3d
+    // transition: 150ms
+    // transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0))
+    // cursor: pointer
 
     &:hover
-        --translate-y: -2px
+        // --translate-y: -2px
         box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5)
 
-    &__flip
-        --rotate-y: 180deg
+    // &__flip
+    //     --rotate-y: 180deg
 
     &__info
         position: absolute
+        top: 95px
         padding: 1rem
-        backface-visibility: hidden
-
-    &__back
-        transform: rotateY(180deg)
+        // backface-visibility: hidden
 
     &:last-child
         margin-bottom: 60px !important
+
+    &__btn 
+        position: absolute
+        bottom: 35px
+
+    &__translation 
+        position: absolute
+        bottom: 45px
+        cursor: pointer

@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import "./flashcard.sass";
+import { Button } from "../button/Button";
 
 const Flashcard = (props) => {
-    const [flip, setFlip] = useState(false);
-    const { flashcard } = props;
-    return (
-        <Card className={`card text-center m-2 ${flip ? "card__flip" : ""}`} onClick={() => setFlip(!flip)}>
-            <Card.Body className="card__info card__front">
-                <Card.Title className="word">{flashcard.english}</Card.Title>
-                <Card.Text className="transcription">{flashcard.transcription}</Card.Text>
-            </Card.Body>
-            <Card.Subtitle className="card__info card__back">{flashcard.russian}</Card.Subtitle>
-        </Card>
-    );
+  const { flashcard } = props;
+
+  const [pressed, setPressed] = useState(false);
+  const handleChange = () => {
+    setPressed(!pressed);
+  };
+  return (
+    <Card className={"card text-center m-2"}>
+      <Card.Body className="card__info card__front">
+        <Card.Title className="word">{flashcard.english}</Card.Title>
+        <Card.Text className="transcription">{flashcard.transcription}</Card.Text>
+      </Card.Body>
+      {pressed ? (
+        <Card.Subtitle className="text-success card__translation" onClick={handleChange}>
+          {flashcard.russian}
+        </Card.Subtitle>
+      ) : (
+        <Button className="btn-outline-success card__btn" children={"Показать перевод"} onClick={handleChange} />
+      )}
+    </Card>
+  );
 };
 
 export default Flashcard;

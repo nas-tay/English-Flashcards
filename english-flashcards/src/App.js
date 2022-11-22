@@ -6,18 +6,18 @@ import FlashcardList from "./components/flashcardList/FlashcardList";
 import CardTable from "./components/cardTable/CardTable";
 
 function App() {
-    return (
-        <>
-            <Header />
-            <main className="py-3">
-                <Container>
-                    <FlashcardList />
-                    <CardTable />
-                </Container>
-            </main>
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <FlashcardList />
+          <CardTable />
+        </Container>
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
