@@ -1,34 +1,29 @@
 import React, { useState } from "react";
 import TableRow from "./TableRow";
 import { Table } from "react-bootstrap";
-import { flashcards } from "../../card-data";
 import { Button } from "../button/Button";
 import "./table.sass";
 
-const CardTable = () => {
-  const [english, setEnglish] = useState("");
-  const [translation, setTranslation] = useState("");
+const initialWord = { id: "", english: "", transcription: "", russian: "", tags: "", tags_json: "" };
 
-  const handleEnglishChange = (event) => {
-    setEnglish(event.target.value);
-  };
+const CardTable = ({ words, createOrUpdate }) => {
+  const [newWord, setNewWord] = useState({ initialWord });
 
-  const handleTranslationChange = (event) => {
-    setTranslation(event.target.value);
+  const handleWordChange = (fieldName, value) => {
+    const temp = { ...newWord };
+    temp[fieldName] = value;
+    setNewWord(temp);
   };
 
   const handleSaveClick = () => {
-    localStorage.setItem("english", english);
-    localStorage.setItem("translation", translation);
-    setEnglish("");
-    setTranslation("");
-    alert("Saved!");
+    const temp = { ...newWord };
+    temp.id = words.length + 1;
+    createOrUpdate(temp);
+    setNewWord(initialWord);
   };
 
   const handleCancelClick = () => {
-    // 👇️ clear input value
-    setEnglish("");
-    setTranslation("");
+    setNewWord(initialWord);
   };
   return (
     <>
@@ -36,17 +31,21 @@ const CardTable = () => {
         <thead>
           <tr>
             <th className="text-center table__english">English</th>
+            <th className="text-center">Transcription</th>
             <th className="text-center table__translation">Russian Translation</th>
             <th className="text-center table__actions">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr className="table__input-row">
+          <tr>
             <th>
-              <input class="form-control form-control-sm" type="text" id="english" value={english} onChange={handleEnglishChange}></input>
+              <input className="form-control form-control-sm" type="text" value={newWord.english} onChange={(event) => handleWordChange("english", event.target.value)}></input>
             </th>
             <th>
-              <input class="form-control form-control-sm" type="text" id="translation" value={translation} onChange={handleTranslationChange}></input>
+              <input className="form-control form-control-sm" type="text" value={newWord.transcription} onChange={(event) => handleWordChange("transcription", event.target.value)}></input>
+            </th>
+            <th>
+              <input className="form-control form-control-sm" type="text" value={newWord.russian} onChange={(event) => handleWordChange("russian", event.target.value)}></input>
             </th>
             <th className="text-center">
               <Button className="btn-outline-success btn-outline-none btn-sm" children={"SAVE"} onClick={handleSaveClick} /> /{" "}
@@ -58,7 +57,7 @@ const CardTable = () => {
 
       <Table bordered hover size="sm">
         <tbody>
-          {flashcards.map((flashcard) => {
+          {words.map((flashcard) => {
             return <TableRow flashcard={flashcard} key={flashcard.id} />;
           })}
         </tbody>

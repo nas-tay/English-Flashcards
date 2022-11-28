@@ -9,6 +9,7 @@ const TableRow = (props) => {
   return (
     <tr>
       <th className="text-center">{flashcard.english}</th>
+      <th className="text-center">{flashcard.transcription}</th>
       <th className="text-center">{flashcard.russian}</th>
       <th className="text-center table__actions">
         <Button className="btn-outline-warning btn-outline-none btn-sm" children={"EDIT"} /> / <Button className="btn-outline-none btn-sm" children={<Icon.TrashFill />} />
